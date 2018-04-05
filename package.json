@@ -1,0 +1,25 @@
+{
+  "name": "reims-0218-hackaton-apa",
+  "version": "1.0.0",
+  "description": "A human vs computer game based on superheroes.",
+  "main": "mainscript.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WildCodeSchool/reims-0218-hackaton-APA.git"
+  },
+  "keywords": [
+    "Superheroes",
+    "game",
+    "hackathon"
+  ],
+  "author": "Aurélie Bayre Arnaud Deschamps, Pierre Dumay",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WildCodeSchool/reims-0218-hackaton-APA/issues"
+  },
+  "homepage": "https://github.com/WildCodeSchool/reims-0218-hackaton-APA#readme"
+}
