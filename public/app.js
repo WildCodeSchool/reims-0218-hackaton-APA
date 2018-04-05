@@ -6,8 +6,9 @@ const render = html => {
 
 const controllers = {
   '/': () => {
-    console.log("je suis dans la route/")
+    console.log("je suis dans la route /")
     render(`
+      <h2>Choose your characteristics:</h2>
       <form>
         <div class="form-group row">
             <label for="inputIntelligence" class="col-sm-2 col-form-label">Intelligence:</label>
