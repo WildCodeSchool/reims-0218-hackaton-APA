@@ -14,9 +14,9 @@ const callMyLink = () => {
       console.log(opponentStats)
       //const opponent = opponentStats.reduce(((acc, carry) =>  acc + carry), '')
       let opponent = ''
-      for (let stat in opponentStats){
-        console.log("stat: ", opponentStats[stat])
-          opponent += `<li>${} : ${opponentStats[stat]}</li>`
+      const keys = Object.keys(opponentStats)
+      for (let key of keys){
+          opponent += `<li>${key} : ${opponentStats[key]}</li>`
       }
       console.log(opponent)
       const displayOpponent = document.getElementById("opponentCard")
