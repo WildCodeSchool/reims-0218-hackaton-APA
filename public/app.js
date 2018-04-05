@@ -6,21 +6,17 @@ const render = html => {
 
 const controllers = {
   '/': () => {
+    console.log("je suis dans la route/")
     const test = '<p>Je teste ! :)</p>'
     render(test)
-  }
+  },
+  '*': () => render('<h1>Not Found</h1>')
 
 }
 
 const routing = () => {
   const routes = [
     '/',
-    '/about',
-    '/users/new',
-    '/users/:slug',
-    '/try',
-    '/list-wilders',
-    '/wilders/new',
     '*'
   ]
   routes.forEach(
