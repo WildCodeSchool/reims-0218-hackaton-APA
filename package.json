@@ -1,7 +1,7 @@
 {
   "name": "reims-0218-hackaton-apa",
   "version": "1.0.0",
-  "description": "A human vs computer game based on superheroes.",
+  "description": "A human vs computer game based on superheroes, developped at #WildHacker18",
   "main": "mainscript.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
