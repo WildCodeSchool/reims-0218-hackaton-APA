@@ -78,26 +78,14 @@ const callMyLink = () => {
       const playerOpponent = new ComputerPlayer(opponentStats.intelligence, opponentStats.strength, opponentStats.speed, opponentStats.durability, opponentStats.power, opponentStats.combat, result.name)
       console.log(playerOpponent)
       
-
       //console.log(opponent)
       const displayOpponent = document.getElementById("opponentCard");
       displayPlayer(playerOpponent, displayOpponent)
 
       let human = "";
-      const playerHuman = new Player(
-        "Hubert de Montmirail",
-        34,
-        66,
-        55,
-        74,
-        "Monjoie! Saint Denis!"
-      );
-      const keysHuman = Object.keys(playerHuman.stats);
-      for (let key of keysHuman) {
-        human += `<li>${key} : ${playerHuman.stats[key]}</li>`;
-      }
+      const playerHuman = new HumanPlayer(inputIntelligence, inputStrength, inputSpeed, inputDurability, power, combat, name, battleCry)
       const displayHuman = document.getElementById("humanCard");
-      displayHuman.innerHTML = human;
+      displayPlayer(playerHuman, displayHuman)
 
       //la boucle des différents tours
     });
