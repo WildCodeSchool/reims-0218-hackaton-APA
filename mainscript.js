@@ -10,5 +10,5 @@ const callMyLink = () => {
     })
     .then(result => opponent = result)
 }
-callMyLink();
-console.log(opponent)
+callMyLink()
+console.log(result)
