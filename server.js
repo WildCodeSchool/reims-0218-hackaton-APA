@@ -16,7 +16,7 @@ const html = `
   <header>
   Hello World
   </header>
-    <div id="main">
+    <div id="main" class="container">
 
     </div>
     <script src="/page.js"></script>
