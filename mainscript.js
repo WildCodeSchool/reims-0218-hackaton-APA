@@ -92,7 +92,7 @@ const callMyLink = () => {
       for (let key of keysHuman) {
         human += `<li>${key} : ${playerHuman.stats[key]}</li>`;
       }
-      const displayHuman = document.getElementById("humanCard");
+      const displayHuman = document.getElementById("HumanCard");
       displayHuman.innerHTML = human;
 
       //la boucle des différents tours
