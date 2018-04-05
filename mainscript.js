@@ -1,31 +1,47 @@
 const randomOpponent = Math.round(Math.random() * 570) +1
+
+//Définition des classes
+//Class Player
 class Player {
-  constructor(name, intelligence, strength, speed, durability, battleCry) {
-    this.name = name
-    this.battleCry = battleCry
-    this.lifePoints = 100
-    this.stats = {
+  constructor (intelligence, strength, speed, durability, power, combat) {
+  this.lifePoints = 100
+  this.stats = {
       intelligence: intelligence,
       strength: strength,
       speed: speed,
       durability: durability,
-      power: Math.round(Math.random() * 100),
-      combat: Math.round(Math.random() * 80) + 20
+      power: power,
+      combat: combat
     }
   }
-  ///methods
-    updateLifePoint(blow) {
+  updateLifePoint(blow) {
       this.lifePoints -= blow
     }
-    addChance(ability) {
-      console.log("original: ", this.stats.power)
-      console.log("ability?", ability, this.stats[ability])
-        this.stats.power += Math.round(Math.random() * this.stats[ability])
-    }
+  addChance(ability) {
+    console.log("original: ", this.stats.power)
+    console.log("ability?", ability, this.stats[ability])
+      this.stats.power += Math.round(Math.random() * this.stats[ability])
+  }
+}
+//class HumanPlayer
+class HumanPlayer extends Player {
+  constructor (intelligence, strength, speed, durability, power, combat, name, battleCry) {
+    super(intelligence, strength, speed, durability, power, combat)
+    this.name = name,
+    this.battleCry = battleCry
+  }
+}
+//class ComputerPlayer
+class ComputerPlayer extends Player {
+  constructor (intelligence, strength, speed, durability, power, combat, name, battleCry) {
+    super(intelligence, strength, speed, durability, power, combat)
+    this.name = name
+  }
 }
 
+//Appel à l'API 
 const callMyLink = () => {
-  const url = `https://cdn.rawgit.com/akabab/superhero-api/0.2.0/api/id/1.json`
+  const url = `https://cdn.rawgit.com/akabab/superhero-api/0.2.0/api/id/3.json`
 
   fetch(url)
     .then(reponse => {
@@ -54,6 +70,8 @@ const callMyLink = () => {
       }
       const displayHuman = document.getElementById("humanCard")
       displayHuman.innerHTML = human
+
+      //la boucle des différents tours 
     })
 }
 callMyLink()
