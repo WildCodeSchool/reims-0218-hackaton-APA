@@ -7,7 +7,7 @@ getTotal = () => {
     const fourth = document.getElementById("value_range4").innerText
     total.innerHTML = "" + (Number(first) + Number(second) + Number(third) + Number(fourth))
 }
-
+//on récupère la valeur de chaque range-slider
 const rangeSlider = function () {
     let slider = $('.range-slider'),
         range = $('.range-slider__range'),
@@ -27,8 +27,4 @@ const rangeSlider = function () {
     });
 };
 rangeSlider()
-
-
-
-
 
