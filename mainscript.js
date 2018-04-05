@@ -65,10 +65,9 @@ const callMyLink = () => {
       return reponse.json();
     })
     .then(result => {
-      console.log(result);
       const opponentStats = result.powerstats;
-
-      console.log(opponentStats);
+      const playerOpponent = new ComputerPlayer(opponentStats.intelligence, opponentStats.strenght, opponentStats.speed, opponentStats.durability, opponentStats.power, opponentStats.combat, result.name)
+      console.log(playerOpponent)
       //const opponent = opponentStats.reduce(((acc, carry) =>  acc + carry), '')
       let opponent = "";
       const keysOpponent = Object.keys(opponentStats);
