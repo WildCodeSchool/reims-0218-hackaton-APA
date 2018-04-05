@@ -1,5 +1,28 @@
 const randomOpponent = Math.round(Math.random() * 570) +1
-
+class Player {
+  constructor(name, intelligence, strength, speed, durability, battleCry) {
+    this.name = name
+    this.battleCry = battleCry
+    this.lifePoints = 100
+    this.stats = {
+      intelligence: intelligence,
+      strength: strength,
+      speed: speed,
+      durability: durability,
+      power: Math.round(Math.random() * 100),
+      combat: Math.round(Math.random() * 80) + 20
+    }
+  }
+  ///methods
+    updateLifePoint(blow) {
+      this.lifePoints -= blow
+    }
+    addChance(ability) {
+      console.log("original: ", this.stats.power)
+      console.log("ability?", ability, this.stats[ability])
+        this.stats.power += Math.round(Math.random() * this.stats[ability])
+    }
+}
 
 const callMyLink = () => {
   const url = `https://cdn.rawgit.com/akabab/superhero-api/0.2.0/api/id/1.json`
@@ -11,16 +34,26 @@ const callMyLink = () => {
     .then(result => {
       console.log(result)
       const opponentStats = result.powerstats
+
       console.log(opponentStats)
       //const opponent = opponentStats.reduce(((acc, carry) =>  acc + carry), '')
       let opponent = ''
-      const keys = Object.keys(opponentStats)
-      for (let key of keys){
+      const keysOpponent = Object.keys(opponentStats)
+      for (let key of keysOpponent){
           opponent += `<li>${key} : ${opponentStats[key]}</li>`
       }
-      console.log(opponent)
+      //console.log(opponent)
       const displayOpponent = document.getElementById("opponentCard")
       displayOpponent.innerHTML = opponent
+
+      let human = ''
+      const playerHuman = new Player("Hubert de Montmirail", 34, 66, 55, 74, "Monjoie! Saint Denis!")
+      const keysHuman = Object.keys(playerHuman.stats)
+      for (let key of keysHuman){
+          human += `<li>${key} : ${playerHuman.stats[key]}</li>`
+      }
+      const displayHuman = document.getElementById("humanCard")
+      displayHuman.innerHTML = human
     })
 }
 callMyLink()
