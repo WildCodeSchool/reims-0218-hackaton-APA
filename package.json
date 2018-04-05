@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/WildCodeSchool/reims-0218-hackaton-APA/issues"
   },
-  "homepage": "https://github.com/WildCodeSchool/reims-0218-hackaton-APA#readme"
+  "homepage": "https://github.com/WildCodeSchool/reims-0218-hackaton-APA#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
 }
