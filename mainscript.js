@@ -1,4 +1,4 @@
-const randomOpponent = Math.round(Math.random() * 570) + 1;
+
 
 //Définition des classes
 //Class Player
@@ -33,13 +33,12 @@ class HumanPlayer extends Player {
     power,
     combat,
     name,
-    battleCry,
-    total
+    battleCry
   ) {
     super(intelligence, strength, speed, durability, power, combat)
-    this.name = name, 
+    this.name = name,
     this.battleCry = battleCry,
-    this.total = this.intelligence + this.strength + this.speed + this.durability
+    this.total = intelligence + strength + speed + durability
   }
 }
 //class ComputerPlayer
@@ -113,23 +112,26 @@ const callMyLink = () => {
       return reponse.json();
     })
     .then(result => {
+      console.log(result.length)
       const selectedHeroes = result.filter(hero => {
+      //  console.log("hero api", hero)
         const totalHero = hero.powerstats.intelligence + hero.powerstats.strength + hero.powerstats.speed + hero.powerstats.durability
-        console.log("notre total hero: ", totalHero)
-        return totalHero < playerHuman.total + 1 && totalHero > playerHuman - 1
+        console.log("comparaison: ", totalHero, playerHuman.total)
+        //console.log("notre total hero: ", totalHero)
+        return totalHero < playerHuman.total + 10 && totalHero > playerHuman.total - 10
     })
-    console.log(totalHero.length)
+    console.log(selectedHeroes.length)
 
       //const opponentStats = result.powerstats;
       //const playerOpponent = new ComputerPlayer(opponentStats.intelligence, opponentStats.strength, opponentStats.speed, opponentStats.durability, opponentStats.power, opponentStats.combat, result.name)
       //const opponentTotal = opponentStats.intelligence + opponentStats.strength + opponentStats.speed + opponentStats.durability
-      
+
 
      // const displayOpponent = document.getElementById("opponentCard");
       //displayPlayer(playerOpponent, displayOpponent)
       //random sur power et combat  les autres seront remplis par l'utilisateur
      let human = "";
-     
+
      const displayHuman = document.getElementById("humanCard");
       displayPlayer(playerHuman, displayHuman)
 
@@ -137,6 +139,3 @@ const callMyLink = () => {
     })
 };
 callMyLink();
-
-
-
