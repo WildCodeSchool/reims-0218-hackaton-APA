@@ -1,4 +1,4 @@
-const randomOpponent = Math.round(Math.random() * 570) + 1;
+
 
 //Définition des classes
 //Class Player
@@ -35,8 +35,10 @@ class HumanPlayer extends Player {
     name,
     battleCry
   ) {
-    super(intelligence, strength, speed, durability, power, combat);
-    (this.name = name), (this.battleCry = battleCry);
+    super(intelligence, strength, speed, durability, power, combat)
+    this.name = name,
+    this.battleCry = battleCry,
+    this.total = intelligence + strength + speed + durability
   }
 }
 //class ComputerPlayer
@@ -65,33 +67,7 @@ const displayPlayer = (obj, element) => {
   element.innerHTML = list
 }
 
-//Appel à l'API
-const callMyLink = () => {
-  const url = `https://cdn.rawgit.com/akabab/superhero-api/0.2.0/api/id/3.json`;
-
-  fetch(url)
-    .then(reponse => {
-      return reponse.json();
-    })
-    .then(result => {
-      const opponentStats = result.powerstats;
-      const playerOpponent = new ComputerPlayer(opponentStats.intelligence, opponentStats.strength, opponentStats.speed, opponentStats.durability, opponentStats.power, opponentStats.combat, result.name)
-      console.log(playerOpponent)
-      
-      //console.log(opponent)
-      const displayOpponent = document.getElementById("opponentCard");
-      displayPlayer(playerOpponent, displayOpponent)
-      //random sur power et combat  les autres seront remplis par l'utilisateur
-      let human = "";
-      const playerHuman = new HumanPlayer(inputIntelligence, inputStrength, inputSpeed, inputDurability, power, combat, name, battleCry)
-      const displayHuman = document.getElementById("humanCard");
-      displayPlayer(playerHuman, displayHuman)
-
-      //la boucle des différents tours
-    });
-};
-callMyLink();
-
+//on veut le total des 4 caractéristiques intelligence, strength, speed et durability
 //Faire la somme des 4 curseurs
 getTotal = () => {
   const total = document.getElementById("total")
@@ -121,3 +97,45 @@ const rangeSlider = function () {
   });
 };
 rangeSlider()
+
+//on construit un obj humain
+//const playerHuman = new HumanPlayer(inputIntelligence, inputStrength, inputSpeed, inputDurability, power, combat, name, battleCry)
+//nos stats
+const playerHuman = new HumanPlayer(50, 70, 80, 67, 70, 60, "Thomas", "Fdsdf")
+
+//Appel à l'API
+const callMyLink = () => {
+  const url = `https://cdn.rawgit.com/akabab/superhero-api/0.2.0/api/all.json`;
+
+  fetch(url)
+    .then(reponse => {
+      return reponse.json();
+    })
+    .then(result => {
+      console.log(result.length)
+      const selectedHeroes = result.filter(hero => {
+      //  console.log("hero api", hero)
+        const totalHero = hero.powerstats.intelligence + hero.powerstats.strength + hero.powerstats.speed + hero.powerstats.durability
+        console.log("comparaison: ", totalHero, playerHuman.total)
+        //console.log("notre total hero: ", totalHero)
+        return totalHero < playerHuman.total + 10 && totalHero > playerHuman.total - 10
+    })
+    console.log(selectedHeroes.length)
+
+      //const opponentStats = result.powerstats;
+      //const playerOpponent = new ComputerPlayer(opponentStats.intelligence, opponentStats.strength, opponentStats.speed, opponentStats.durability, opponentStats.power, opponentStats.combat, result.name)
+      //const opponentTotal = opponentStats.intelligence + opponentStats.strength + opponentStats.speed + opponentStats.durability
+
+
+     // const displayOpponent = document.getElementById("opponentCard");
+      //displayPlayer(playerOpponent, displayOpponent)
+      //random sur power et combat  les autres seront remplis par l'utilisateur
+     let human = "";
+
+     const displayHuman = document.getElementById("humanCard");
+      displayPlayer(playerHuman, displayHuman)
+
+      //la boucle des différents tours
+    })
+};
+callMyLink();
