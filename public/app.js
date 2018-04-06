@@ -83,49 +83,53 @@ const controllers = {
     render(`
       <h2>Choose your characteristics:</h2>
       <form id="userForm">
-        <div class="form-group">
-          <label for="inputName">Name:</label>
-          <input type="text" class="col-sm-10 form-control" id="inputName" name="name" placeholder="Your name">
-        </div>
+
         <div class="form-group row">
             <label for="inputIntelligence" class="col-sm-2 col-form-label">Intelligence:</label>
             <div class="col-sm-10">
                 <div class="range-slider">
                     <input class="range-slider__range" type="range" value="50" min="0" max="100">
-                    <span id="value_range1" class="range-slider__value">0</span>
+                    <span id="inputIntelligence" name="intelligence" class="myForm range-slider__value">0</span>
                 </div>
             </div>
         </div>
         <div class="form-group row">
-            <label for="inputIntelligence" class="col-sm-2 col-form-label">Strength:</label>
+            <label for="inputStrength" class="col-sm-2 col-form-label">Strength:</label>
             <div class="col-sm-10">
                 <div class="range-slider">
                     <input class="range-slider__range" type="range" value="50" min="0" max="100">
-                    <span id ="value_range2" class="range-slider__value">0</span>
+                    <span id ="InputStrength" name="strength" class="myForm range-slider__value">0</span>
                 </div>
             </div>
         </div>
         <div class="form-group row">
-            <label for="inputIntelligence" class="col-sm-2 col-form-label">Speed:</label>
+            <label for="inputSpeed" class="col-sm-2 col-form-label">Speed:</label>
             <div class="col-sm-10">
                 <div class="range-slider">
                     <input class="range-slider__range" type="range" value="50" min="0" max="100">
-                    <span id="value_range3" class="range-slider__value">0</span>
+                    <span id="inputSpeed" name="speed" class="myForm range-slider__value">0</span>
                 </div>
             </div>
         </div>
+
         <div class="form-group row">
-            <label for="inputIntelligence" class="col-sm-2 col-form-label">Durability:</label>
+            <label for="inputDurability" class="col-sm-2 col-form-label">Durability:</label>
             <div class="col-sm-10">
                 <div class="range-slider">
                     <input class="range-slider__range" type="range" value="50" min="0" max="100">
-                    <span id="value_range4" class="range-slider__value">0</span>
+                    <span id="inputDurability" name="speed" class="myForm range-slider__value">0</span>
                 </div>
             </div>
         </div>
+
+        <div class="form-group row">
+          <label for="inputName">Name:</label>
+          <input type="text" class="myForm col-sm-10 form-control" id="inputName" name="name" placeholder="Your name">
+        </div>
+
         <div class="form-group">
           <label for="inputBattleCry">Battle cry:</label>
-          <input type="text" class="col-sm-10 form-control" id="battleCry" placeholder="Your battle cry!">
+          <input type="text" class="myForm col-sm-10 form-control" id="battleCry" placeholder="Your battle cry!">
         </div>
 
         <div class="form-group row">
