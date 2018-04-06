@@ -5,6 +5,7 @@ const render = html => {
 }
 
 let playerHuman
+let total
 //fonction makeOpponent qui génère une carte bootrap
 
 //objet pour l'humain. Déclaré ici, modifié dans les fonctions du form(route /),
@@ -63,63 +64,73 @@ const controllers = {
 
         <div class="form-group row">
             <div class="col-sm-10">
-                <a class="btn btn-success btn-lg" href="/opponent" role="button">See opponent »</a>
+                <a id="finishCreation" class="btn btn-success btn-lg" href="/opponent" role="button">See opponent »</a>
             </div>
         </div>
     </form>
     <p id="total"></p>`)
 
 
-    const createHumanPlayer = () => {
-      const first = document.getElementById("value_range1").innerText
-      const second = document.getElementById("value_range2").innerText
-      const third = document.getElementById("value_range3").innerText
-      const fourth = document.getElementById("value_range4").innerText
-      const name = document.getElementById("vinputName").value
-      const battleCry = document.getElementById("battleCry").value
-      const randomPower = Math.round(Math.random() * 100)
-      const randomCombat = Math.round(Math.random() * 100)
-      return new HumanPlayer(first, second, third, fourth, randomPower, randomCombat, name, battleCry)
-    }
+    //getTotal
+  const createHumanPlayer = () => {
+    const first = document.getElementById("value_range1").innerText
+    const second = document.getElementById("value_range2").innerText
+    const third = document.getElementById("value_range3").innerText
+    const fourth = document.getElementById("value_range4").innerText
+    const name = document.getElementById("vinputName").value
+    const battleCry = document.getElementById("battleCry").value
+    const randomPower = Math.round(Math.random() * 100)
+    const randomCombat = Math.round(Math.random() * 100)
+    return new HumanPlayer(first, second, third, fourth, randomPower, randomCombat, name, battleCry)
+  }
 
 
-    const getTotal = () => {
-      console.log("coucou je suis dans getTotal")
-        const total = document.getElementById("total")
-        const intelligence = document.getElementById("value_range1").innerText
-        const strength = document.getElementById("value_range2").innerText
-        const speed = document.getElementById("value_range3").innerText
-        const durability = document.getElementById("value_range4").innerText
-        total.innerHTML = "" + (Number(intelligence) + Number(strength) + Number(speed) + Number(durability))
-    }
+  const getTotal = () => {
+    console.log("coucou je suis dans getTotal")
+      const total = document.getElementById("total")
+      const intelligence = document.getElementById("value_range1").innerText
+      const strength = document.getElementById("value_range2").innerText
+      const speed = document.getElementById("value_range3").innerText
+      const durability = document.getElementById("value_range4").innerText
+      total.innerHTML = "" + (Number(intelligence) + Number(strength) + Number(speed) + Number(durability))
+  }
 
 
-    //on récupère la valeur de chaque range-slider
-    const rangeSlider = function () {
-        let slider = $('.range-slider'),
-            range = $('.range-slider__range'),
-            value = $('.range-slider__value');
+  //on récupère la valeur de chaque range-slider
+  const rangeSlider = function () {
+      let slider = $('.range-slider'),
+          range = $('.range-slider__range'),
+          value = $('.range-slider__value');
 
 
 
-        slider.each(function () {
-            value.each(function () {
-                const value = $(this).prev().attr('value');
-                $(this).html(value);
-            });
+      slider.each(function () {
+          value.each(function () {
+              const value = $(this).prev().attr('value');
+              $(this).html(value);
+          });
 
-            range.on('input', function () {
-                console.log(this.value)
-                $(this).next(value).html(this.value)
-                getTotal()
-                userStats = getTotal
-                console.log(playerHuman)
-            });
-        });
-        return userStats
-    };
+          range.on('input', function () {
+              console.log(this.value)
+              $(this).next(value).html(this.value)
+              getTotal()
+            //  userStats = getTotal
+              //console.log(playerHuman)
+          });
+      });
+      //return userStats
+  };
+
     rangeSlider()
-    playerHuman = createHumanPlayer()
+
+
+    const validateHumanClickHandler = document.getElementById("finishCreation")
+    validateHumanClickHandler.addEventListener("submit", e => {
+      e.preventDefault()
+      //createHumanPlayer()
+      playerHuman = createHumanPlayer()
+      total = getTotal()
+    })
   },
 
   /////////////////////////////////////////////////////
