@@ -284,7 +284,7 @@ const controllers = {
           //random sur power et combat  les autres seront remplis par l'utilisateur
           let human = "";
 
-          const displayHuman = document.getElementById("humanCard");
+          const displayHuman = document.getElementById("display");
           displayPlayer(playerHuman1, displayHuman)
            
           //on ajoute random power et 100 en lifePoints
