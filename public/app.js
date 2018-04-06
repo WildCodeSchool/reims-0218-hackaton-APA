@@ -1,9 +1,20 @@
-const mainDiv = document.getElementById("main");
+const mainDiv = document.getElementById('main')
 
 const render = html => {
-  mainDiv.innerHTML = html;
-};
+  mainDiv.innerHTML = html
+}
 
+const displayPlayer = (obj, element) => {
+  let list = "";
+  console.log("onva display:", obj.name)
+  list += `<li>name: ${obj.name}</li>`
+  const keys = Object.keys(obj.stats)
+  console.log("nos clés: ", keys)
+  for (let key of keys) {
+    list += `<li>${key} : ${obj.stats[key]}</li>`
+  }
+  element.innerHTML = list
+}
 
 class Player {
   constructor(intelligence, strength, speed, durability, power, combat) {
@@ -78,14 +89,14 @@ const serializeForm = form => {
 //et réutilisé dans (/opponent) pour choisir les 3 potentiels adversaires
 
 const controllers = {
-  "/": () => {
-    console.log("je suis dans la route /");
+  '/': () => {
+    console.log("je suis dans la route /")
     render(`
       <h2>Choose your characteristics:</h2>
       <form id="userForm">
 
         <div class="form-group row">
-            <label for="inputIntelligence" class="col-sm-2 col-form-label text-center">Intelligence:</label>
+            <label for="inputIntelligence" class="col-sm-2 col-form-label">Intelligence:</label>
             <div class="col-sm-10">
                 <div class="range-slider">
                     <input class="myForm range-slider__range" name="intelligence" type="range" value="50" min="0" max="100">
@@ -187,7 +198,7 @@ const controllers = {
               $(this).next(value).html(this.value)
               //getTotal()
             //  userStats = getTotal
-              //console.log(playerHuman)
+              //console.log(playerHuman1)
           });
       });
       //return userStats
@@ -201,14 +212,15 @@ const controllers = {
       e.preventDefault()
       const data = serializeForm(form)
       console.log("notre humain : ", data)
+      sessionStorage.setItem('user', JSON.stringify(data))
     })
   },
 
   /////////////////////////////////////////////////////
   // route pour l'étape adversaire
   ///////////////////////////////////////////////////
-  "/opponent": () => {
-    render(`
+  '/opponent' : () => {
+      render(`
         <ul id="display">
       </ul>
       <ul id="first">
@@ -219,7 +231,7 @@ const controllers = {
       </ul>
       <ul id="third">
 
-      </ul>`);
+      </ul>`)
 
     const callMyLink = () => {
       const url = `https://cdn.rawgit.com/akabab/superhero-api/0.2.0/api/all.json`;
@@ -229,60 +241,43 @@ const controllers = {
           return reponse.json();
         })
         .then(result => {
-          //console.log(result.length)
+          const playerHuman1 = new HumanPlayer(50, 70, 20, 67, 70, 60, "Thomas", "Fdsdf")
+          console.log("je suis l'humain ", playerHuman1)
           const selectedHeroes = result.filter(hero => {
             //console.log("hero api", hero)
-            const totalHero =
-              hero.powerstats.intelligence +
-              hero.powerstats.strength +
-              hero.powerstats.speed +
-              hero.powerstats.durability;
-            //console.log("comparaison: ", totalHero, playerHuman.total)
+            const totalHero = hero.powerstats.intelligence + hero.powerstats.strength + hero.powerstats.speed + hero.powerstats.durability
+            //console.log("comparaison: ", totalHero, playerHuman1.total)
             //console.log("notre total hero: ", totalHero)
-            return (
-              totalHero < playerHuman.total + 10 &&
-              totalHero > playerHuman.total - 10
-            );
-          });
+            return totalHero < playerHuman1.total + 10 && totalHero > playerHuman1.total - 10
+          })
           //Générer 3 computerPlayers aléatoires
 
-          console.log("Résultat du filtre: ", selectedHeroes.length);
-          const first = Math.floor(Math.random() * selectedHeroes.length) + 1;
-          const second = Math.floor(Math.random() * selectedHeroes.length) + 1;
-          const third = Math.floor(Math.random() * selectedHeroes.length) + 1;
+          console.log("Résultat du filtre: ", selectedHeroes.length)
+          const first = Math.floor(Math.random() * selectedHeroes.length) + 1
+          const second = Math.floor(Math.random() * selectedHeroes.length) + 1
+          const third = Math.floor(Math.random() * selectedHeroes.length) + 1
 
-          let heroesArr = [
-            selectedHeroes[first],
-            selectedHeroes[second],
-            selectedHeroes[third]
-          ];
-          console.log(heroesArr[0]);
-          const heroesObjects = heroesArr.map(
-            obj =>
-              new ComputerPlayer(
-                obj.powerstats.intelligence,
-                obj.powerstats.strength,
-                obj.powerstats.speed,
-                obj.powerstats.durability,
-                obj.powerstats.power,
-                obj.powerstats.combat,
-                obj.name
-              )
-          );
+          let heroesArr = [selectedHeroes[first], selectedHeroes[second], selectedHeroes[third]]
+          console.log("Je suis le tableau de 3 ", heroesArr)
+          const heroesObjects = heroesArr.map(obj => new ComputerPlayer(obj.powerstats.intelligence, obj.powerstats.strength, obj.powerstats.speed, obj.powerstats.durability, obj.powerstats.power, obj.powerstats.combat, obj.name))
 
-          const firstOpponent = document.getElementById("first");
-          const secondOpponent = document.getElementById("second");
-          const thirdOpponent = document.getElementById("third");
-          displayPlayer(heroesObjects[0], firstOpponent);
-          displayPlayer(heroesObjects[1], secondOpponent);
-          displayPlayer(heroesObjects[2], thirdOpponent);
+          const firstOpponent = document.getElementById("first")
+          const secondOpponent = document.getElementById("second")
+          const thirdOpponent = document.getElementById("third")
+          displayPlayer(heroesObjects[0], firstOpponent)
+          displayPlayer(heroesObjects[1], secondOpponent)
+          displayPlayer(heroesObjects[2], thirdOpponent)
 
-          const htmlListThreeHeroes = document.getElementById("display");
-          htmlListThreeHeroes.innerHTML = listThreeHeroes;
+
+
+          // const htmlListThreeHeroes = document.getElementById('display')
+          // htmlListThreeHeroes.innerHTML = listThreeHeroes
+
 
           //const opponentStats = result.powerstats;
           //const playerOpponent = new ComputerPlayer(opponentStats.intelligence, opponentStats.strength, opponentStats.speed, opponentStats.durability, opponentStats.power, opponentStats.combat, result.name)
           //const opponentTotal = opponentStats.intelligence + opponentStats.strength + opponentStats.speed + opponentStats.durability
+
 
           // const displayOpponent = document.getElementById("opponentCard");
           //displayPlayer(playerOpponent, displayOpponent)
@@ -290,19 +285,24 @@ const controllers = {
           let human = "";
 
           const displayHuman = document.getElementById("humanCard");
-          displayPlayer(playerHuman, displayHuman);
+          displayPlayer(playerHuman1, displayHuman)
+           
+          //on ajoute random power et 100 en lifePoints
 
           //la boucle des différents tours
-        });
+          
+        })
     };
     callMyLink();
   },
-  "/game": () => {
-    render("<p>Now playing...wait 2 sec to see result alert</p>");
+  '/game' : () =>{
+    render("<p>Now playing...wait 2 sec to see result alert</p>")
     setTimeout(() => alert("YOU WIN!!!"), 2000);
+
   },
-  "*": () => render("<h1>Not Found</h1>")
-};
+  '*': () => render('<h1>Not Found</h1>')
+
+}
 
 // const routing = () => {
 //   const routes = [
@@ -320,12 +320,20 @@ const controllers = {
 // //appel cette fonction pour gérer les routes
 // routing()
 
-const route = pathname => {};
+const route = pathname => {
+
+}
+
 
 (() => {
-  ["/", "/opponent", "/game", "*"].forEach(path =>
-    page(path, controllers[path])
-  );
-  page();
+
+  ['/', '/opponent', '/game', '*'].forEach(
+    path => page(path, controllers[path])
+  )
+  page()
   // route()
-})();
+
+})()
+
+
+
