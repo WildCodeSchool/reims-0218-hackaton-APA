@@ -14,6 +14,10 @@ const controllers = {
     render(`
       <h2>Choose your characteristics:</h2>
       <form>
+        <div class="form-group">
+          <label for="inputName">Name:</label>
+          <input type="text" class="col-sm-10 form-control" id="inputName" placeholder="Your name">
+        </div>
         <div class="form-group row">
             <label for="inputIntelligence" class="col-sm-2 col-form-label">Intelligence:</label>
             <div class="col-sm-10">
@@ -49,6 +53,10 @@ const controllers = {
                     <span id="value_range4" class="range-slider__value">0</span>
                 </div>
             </div>
+        </div>
+        <div class="form-group">
+          <label for="inputBattleCry">Battle cry:</label>
+          <input type="text" class="col-sm-10 form-control" id="battleCry" placeholder="Your battle cry!">
         </div>
 
         <div class="form-group row">
