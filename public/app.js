@@ -65,6 +65,9 @@ class Player {
     console.log('ability?', ability, this.stats[ability]);
     this.stats.power += Math.round(Math.random() * this.stats[ability]);
   }
+  resetPower() {
+    this.stats.power = this.initialPower
+  }
 }
 //class HumanPlayer
 class HumanPlayer extends Player {
@@ -282,30 +285,7 @@ const controllers = {
           const allOpponents = heroesArr. reduce((carry, opponent) => carry + makeOpponentCard(opponent, displayComputer), '')
           const displayCards = document.getElementById('opponentRow')
           displayCards.innerHTML = allOpponents
-          // const firstOpponent = document.getElementById('first')
-          // const secondOpponent = document.getElementById('second')
-          // const thirdOpponent = document.getElementById('third')
-          // displayPlayer(heroesObjects[0], firstOpponent)
-          // displayPlayer(heroesObjects[1], secondOpponent)
-          // displayPlayer(heroesObjects[2], thirdOpponent)
-
-
-
-
-
-          // const htmlListThreeHeroes = document.getElementById('display')
-          // htmlListThreeHeroes.innerHTML = listThreeHeroes
-
-
-          //const opponentStats = result.powerstats;
-          //const playerOpponent = new ComputerPlayer(opponentStats.intelligence, opponentStats.strength, opponentStats.speed, opponentStats.durability, opponentStats.power, opponentStats.combat, result.name)
-          //const opponentTotal = opponentStats.intelligence + opponentStats.strength + opponentStats.speed + opponentStats.durability
-
-
-          // const displayOpponent = document.getElementById('opponentCard');
-          //displayPlayer(playerOpponent, displayOpponent)
-          //random sur power et combat  les autres seront remplis par lutilisateur
-          let human = '';
+        
 
           const displayHuman = document.getElementById('display');
           displayPlayer(playerHuman1, displayHuman)
@@ -313,7 +293,22 @@ const controllers = {
           //on ajoute random power et 100 en lifePoints
 
           //la boucle des différents tours
-          
+          const computer = heroesObjects[1]
+            while(playerHuman1.lifePoints > 0 && computer.lifePoints > 0) {
+              playerHuman1.addChance('strength')
+              computer.updateLifePoint(playerHuman1.stats.power)
+              playerHuman1.resetPower()
+              console.log(computer)
+              computer.addChance('speed')
+              playerHuman1.updateLifePoint(computer.stats.power)
+              computer.resetPower()
+              console.log(playerHuman1)
+            }
+            if (playerHuman1.lifePoints > computer.lifePoints) {
+              alert(`Le vainqueur est ${playerHuman1.name}`)
+            } else {
+              alert(`Le vainqueur est ${computer.name}`)
+            }
         })
     };
     callMyLink();
