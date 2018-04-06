@@ -305,20 +305,9 @@ const controllers = {
               console.log(playerHuman1)
             }
             
-          //   const winner =  (obj1, obj2)=> {
-          //     console.log("Prions...")
-          //     if (obj1.lifePoints > obj2.lifePoints) {
-          //       alert(`Le vainqueur est ${obj1.name}`)
-          //     } else {
-          //       alert(`Le vainqueur est ${obj2.name}`)
-          //     }
-          // }
+            //fonction à déclencher sur le click
           const winner2 = () => playerHuman1 > computer ? alert(`Le vainqueur est ${playerHuman1.name}`) : alert(`Le vainqueur est ${computer.name}`)
-            // const whoWins = (obj1, obj2) => {
-            //   return winner(obj1, obj2)
-            // }
-            //callMyLink();
-           // return [playerHuman1, computer]
+            
             console.log('why???', playerHuman1)
             const fightButton = document.getElementById('fight')
             fightButton.addEventListener('click', winner2)
@@ -335,22 +324,6 @@ const controllers = {
   '*': () => render('<h1>Not Found</h1>')
 
 }
-
-// const routing = () => {
-//   const routes = [
-//     '/',
-//     '/opponent',
-//     'game',
-//     '*'
-//   ]
-//   routes.forEach(
-//     path => page(path, controllers[path])
-//   )
-//   page()
-// }
-//
-// //appel cette fonction pour gérer les routes
-// routing()
 
 const route = pathname => {
 
