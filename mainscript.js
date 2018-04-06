@@ -35,8 +35,8 @@ class HumanPlayer extends Player {
     name,
     battleCry
   ) {
-    super(intelligence, strength, speed, durability, power, combat);
-    (this.name = name), (this.battleCry = battleCry);
+    super(intelligence, strength, speed, durability, power, combat)
+    (this.name = name), (this.battleCry = battleCry)
   }
 }
 //class ComputerPlayer
@@ -65,33 +65,7 @@ const displayPlayer = (obj, element) => {
   element.innerHTML = list
 }
 
-//Appel à l'API
-const callMyLink = () => {
-  const url = `https://cdn.rawgit.com/akabab/superhero-api/0.2.0/api/id/3.json`;
-
-  fetch(url)
-    .then(reponse => {
-      return reponse.json();
-    })
-    .then(result => {
-      const opponentStats = result.powerstats;
-      const playerOpponent = new ComputerPlayer(opponentStats.intelligence, opponentStats.strength, opponentStats.speed, opponentStats.durability, opponentStats.power, opponentStats.combat, result.name)
-      console.log(playerOpponent)
-      
-      //console.log(opponent)
-      const displayOpponent = document.getElementById("opponentCard");
-      displayPlayer(playerOpponent, displayOpponent)
-      //random sur power et combat  les autres seront remplis par l'utilisateur
-      let human = "";
-      const playerHuman = new HumanPlayer(inputIntelligence, inputStrength, inputSpeed, inputDurability, power, combat, name, battleCry)
-      const displayHuman = document.getElementById("humanCard");
-      displayPlayer(playerHuman, displayHuman)
-
-      //la boucle des différents tours
-    });
-};
-callMyLink();
-
+//on veut le total des 4 caractéristiques intelligence, strength, speed et durability
 //Faire la somme des 4 curseurs
 getTotal = () => {
   const total = document.getElementById("total")
@@ -121,3 +95,39 @@ const rangeSlider = function () {
   });
 };
 rangeSlider()
+
+//Appel à l'API
+const callMyLink = () => {
+  const url = `https://cdn.rawgit.com/akabab/superhero-api/0.2.0/api/all.json`;
+
+  fetch(url)
+    .then(reponse => {
+      return reponse.json();
+    })
+    .then(result => {
+      const selectedHeroes = result.filter(hero => {
+        (hero.powerstats.intelligence + hero.powerstats.strength + hero.powerstats.speed + hero.powerstats.durability)
+        console.log(result)
+  
+      })
+        
+      const opponentStats = result.powerstats;
+      const playerOpponent = new ComputerPlayer(opponentStats.intelligence, opponentStats.strength, opponentStats.speed, opponentStats.durability, opponentStats.power, opponentStats.combat, result.name)
+      const opponentTotal = opponentStats.intelligence + opponentStats.strength + opponentStats.speed + opponentStats.durability
+      
+
+      const displayOpponent = document.getElementById("opponentCard");
+      displayPlayer(playerOpponent, displayOpponent)
+      //random sur power et combat  les autres seront remplis par l'utilisateur
+      let human = "";
+      const playerHuman = new HumanPlayer(inputIntelligence, inputStrength, inputSpeed, inputDurability, power, combat, name, battleCry)
+      const displayHuman = document.getElementById("humanCard");
+      displayPlayer(playerHuman, displayHuman)
+
+      //la boucle des différents tours
+    })
+};
+callMyLink();
+
+
+
