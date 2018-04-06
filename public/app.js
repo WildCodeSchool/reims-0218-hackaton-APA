@@ -4,8 +4,74 @@ const render = html => {
   mainDiv.innerHTML = html
 }
 
-let playerHuman
-let total
+
+class Player {
+  constructor(intelligence, strength, speed, durability, power, combat) {
+    this.lifePoints = 100;
+    this.stats = {
+      intelligence: intelligence,
+      strength: strength,
+      speed: speed,
+      durability: durability,
+      power: power,
+      combat: combat
+    };
+  }
+  updateLifePoint(blow) {
+    this.lifePoints -= blow;
+  }
+  addChance(ability) {
+    console.log("original: ", this.stats.power);
+    console.log("ability?", ability, this.stats[ability]);
+    this.stats.power += Math.round(Math.random() * this.stats[ability]);
+  }
+}
+//class HumanPlayer
+class HumanPlayer extends Player {
+  constructor(
+    intelligence,
+    strength,
+    speed,
+    durability,
+    power,
+    combat,
+    name,
+    battleCry
+  ) {
+    super(intelligence, strength, speed, durability, power, combat)
+    this.name = name,
+    this.battleCry = battleCry,
+    this.total = intelligence + strength + speed + durability
+  }
+}
+//class ComputerPlayer
+class ComputerPlayer extends Player {
+  constructor(
+    intelligence,
+    strength,
+    speed,
+    durability,
+    power,
+    combat,
+    name,
+    battleCry
+  ) {
+    super(intelligence, strength, speed, durability, power, combat);
+    this.name = name;
+  }
+
+}
+
+const serializeForm = form => {
+  const data = {}
+  const elements = form.getElementsByClassName('form-control')
+  for(el of elements) {
+    data[el.name] = el.value
+  }
+  return data
+}
+
+
 //fonction makeOpponent qui génère une carte bootrap
 
 //objet pour l'humain. Déclaré ici, modifié dans les fonctions du form(route /),
@@ -16,10 +82,10 @@ const controllers = {
     console.log("je suis dans la route /")
     render(`
       <h2>Choose your characteristics:</h2>
-      <form>
+      <form id="userForm">
         <div class="form-group">
           <label for="inputName">Name:</label>
-          <input type="text" class="col-sm-10 form-control" id="inputName" placeholder="Your name">
+          <input type="text" class="col-sm-10 form-control" id="inputName" name="name" placeholder="Your name">
         </div>
         <div class="form-group row">
             <label for="inputIntelligence" class="col-sm-2 col-form-label">Intelligence:</label>
@@ -64,11 +130,12 @@ const controllers = {
 
         <div class="form-group row">
             <div class="col-sm-10">
-                <a id="finishCreation" class="btn btn-success btn-lg" href="/opponent" role="button">See opponent »</a>
+                <button id="recordStats" class="btn btn-success btn-lg" role="button"record my stats!</a>
             </div>
         </div>
     </form>
-    <p id="total"></p>`)
+    <p id="total"></p>
+      <a id="finishCreation" class="btn btn-success btn-lg" href="/opponent" role="button">See opponent »</a>`)
 
 
     //getTotal
@@ -124,12 +191,15 @@ const controllers = {
     rangeSlider()
 
 
-    const validateHumanClickHandler = document.getElementById("finishCreation")
+    const form = document.getElementById("UserForm")
     validateHumanClickHandler.addEventListener("submit", e => {
       e.preventDefault()
+      const data = serializeForm(form)
+
+
       //createHumanPlayer()
-      playerHuman = createHumanPlayer()
-      total = getTotal()
+      const playerHuman = new HumanPlayer(intelligence, strength, speed, durability, name, battlecry)
+      console.log("carc humaines : ", playerHuman)
     })
   },
 
@@ -158,7 +228,7 @@ const controllers = {
           return reponse.json();
         })
         .then(result => {
-          console.log(result.length)
+          //console.log(result.length)
           const selectedHeroes = result.filter(hero => {
             //console.log("hero api", hero)
             const totalHero = hero.powerstats.intelligence + hero.powerstats.strength + hero.powerstats.speed + hero.powerstats.durability
