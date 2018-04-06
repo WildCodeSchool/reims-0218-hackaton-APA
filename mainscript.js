@@ -24,6 +24,8 @@ class Player {
     this.stats.power += Math.round(Math.random() * this.stats[ability]);
   }
 }
+
+
 //class HumanPlayer
 class HumanPlayer extends Player {
   constructor(
@@ -165,3 +167,4 @@ const callMyLink = () => {
     })
 };
 callMyLink();
+
