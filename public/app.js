@@ -4,11 +4,99 @@ const render = html => {
   mainDiv.innerHTML = html
 }
 
+//fonction makeOpponent qui génère une carte bootrap
+
+
+
 const controllers = {
   '/': () => {
-    console.log("je suis dans la route/")
-    const test = '<p>Je me choisis des supers caractérisitique!</p><a class="btn btn-success btn-lg" href="/opponent" role="button">See Opponent»</a>'
-    render(test)
+    console.log("je suis dans la route /")
+    render(`
+      <h2>Choose your characteristics:</h2>
+      <form>
+        <div class="form-group row">
+            <label for="inputIntelligence" class="col-sm-2 col-form-label">Intelligence:</label>
+            <div class="col-sm-10">
+                <div class="range-slider">
+                    <input class="range-slider__range" type="range" value="50" min="0" max="100">
+                    <span id="value_range1" class="range-slider__value">0</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputIntelligence" class="col-sm-2 col-form-label">Strength:</label>
+            <div class="col-sm-10">
+                <div class="range-slider">
+                    <input class="range-slider__range" type="range" value="50" min="0" max="100">
+                    <span id ="value_range2" class="range-slider__value">0</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputIntelligence" class="col-sm-2 col-form-label">Speed:</label>
+            <div class="col-sm-10">
+                <div class="range-slider">
+                    <input class="range-slider__range" type="range" value="50" min="0" max="100">
+                    <span id="value_range3" class="range-slider__value">0</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputIntelligence" class="col-sm-2 col-form-label">Durability:</label>
+            <div class="col-sm-10">
+                <div class="range-slider">
+                    <input class="range-slider__range" type="range" value="50" min="0" max="100">
+                    <span id="value_range4" class="range-slider__value">0</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <a class="btn btn-success btn-lg" href="/game" role="button">See opponent »</a>
+            </div>
+        </div>
+    </form>
+    <p id="total"></p>`)
+
+
+
+    getTotal = () => {
+      console.log("coucou je suis dans getTotal")
+        const total = document.getElementById("total")
+        const intelligence = document.getElementById("value_range1").innerText
+        const strength = document.getElementById("value_range2").innerText
+        const speed = document.getElementById("value_range3").innerText
+        const durability = document.getElementById("value_range4").innerText
+        total.innerHTML = "" + (Number(intelligence) + Number(strength) + Number(speed) + Number(durability))
+        return [intelligence, strength, speed, durability]
+    }
+    //on récupère la valeur de chaque range-slider
+    const rangeSlider = function () {
+        let slider = $('.range-slider'),
+            range = $('.range-slider__range'),
+            value = $('.range-slider__value');
+
+        let userStats = []
+
+        slider.each(function () {
+            value.each(function () {
+                const value = $(this).prev().attr('value');
+                $(this).html(value);
+            });
+
+            range.on('input', function () {
+                console.log(this.value)
+                $(this).next(value).html(this.value)
+                getTotal()
+                userStats = getTotal
+                console.log(playerHuman)
+            });
+        });
+        return userStats
+    };
+    rangeSlider()
+    const playerHuman = new HumanPlayer(userStats[0], userStats[1], userStats[2], userStats[3], 70, 60, "Thomas", "CONSOLE.LOG!!!")
   },
   '/opponent' : () => {
     const fakeOpponent = '<p>Your opponent: Hubert de Montmirail</p><a class="btn btn-success btn-lg" href="/game" role="button">Ready to play»</a>'
