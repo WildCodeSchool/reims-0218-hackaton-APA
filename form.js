@@ -27,4 +27,3 @@ const rangeSlider = function () {
     });
 };
 rangeSlider()
-
