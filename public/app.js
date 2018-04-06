@@ -64,7 +64,7 @@ class ComputerPlayer extends Player {
 
 const serializeForm = form => {
   const data = {}
-  const elements = form.getElementsByClassName('form-control')
+  const elements = form.getElementsByClassName('myForm')
   for(el of elements) {
     data[el.name] = el.value
   }
@@ -88,8 +88,8 @@ const controllers = {
             <label for="inputIntelligence" class="col-sm-2 col-form-label">Intelligence:</label>
             <div class="col-sm-10">
                 <div class="range-slider">
-                    <input class="range-slider__range" type="range" value="50" min="0" max="100">
-                    <span id="inputIntelligence" name="intelligence" class="myForm range-slider__value">0</span>
+                    <input class="myForm range-slider__range" name="intelligence" type="range" value="50" min="0" max="100">
+                    <span id="inputIntelligence" class="range-slider__value">0</span>
                 </div>
             </div>
         </div>
@@ -97,8 +97,8 @@ const controllers = {
             <label for="inputStrength" class="col-sm-2 col-form-label">Strength:</label>
             <div class="col-sm-10">
                 <div class="range-slider">
-                    <input class="range-slider__range" type="range" value="50" min="0" max="100">
-                    <span id ="InputStrength" name="strength" class="myForm range-slider__value">0</span>
+                    <input class="myForm range-slider__range" name="strength" type="range" value="50" min="0" max="100">
+                    <span id="InputStrength" class="range-slider__value">0</span>
                 </div>
             </div>
         </div>
@@ -106,8 +106,8 @@ const controllers = {
             <label for="inputSpeed" class="col-sm-2 col-form-label">Speed:</label>
             <div class="col-sm-10">
                 <div class="range-slider">
-                    <input class="range-slider__range" type="range" value="50" min="0" max="100">
-                    <span id="inputSpeed" name="speed" class="myForm range-slider__value">0</span>
+                    <input class="myForm range-slider__range" name="speed" type="range" value="50" min="0" max="100">
+                    <span id="inputSpeed" class="range-slider__value">0</span>
                 </div>
             </div>
         </div>
@@ -116,8 +116,8 @@ const controllers = {
             <label for="inputDurability" class="col-sm-2 col-form-label">Durability:</label>
             <div class="col-sm-10">
                 <div class="range-slider">
-                    <input class="range-slider__range" type="range" value="50" min="0" max="100">
-                    <span id="inputDurability" name="speed" class="myForm range-slider__value">0</span>
+                    <input class="myForm range-slider__range" name="durability" type="range" value="50" min="0" max="100">
+                    <span id="inputDurability"  class="range-slider__value">0</span>
                 </div>
             </div>
         </div>
@@ -129,7 +129,7 @@ const controllers = {
 
         <div class="form-group">
           <label for="inputBattleCry">Battle cry:</label>
-          <input type="text" class="myForm col-sm-10 form-control" id="battleCry" placeholder="Your battle cry!">
+          <input type="text" class="myForm col-sm-10 form-control" id="battleCry" name="battleCry" placeholder="Your battle cry!">
         </div>
 
         <div class="form-group row">
@@ -139,32 +139,33 @@ const controllers = {
         </div>
     </form>
     <p id="total"></p>
-      <a id="finishCreation" class="btn btn-success btn-lg" href="/opponent" role="button">See opponent »</a>`)
+      <a id="finishCreation" class="btn btn-success btn-lg" href="/opponent" role="button">See opponent »</a>`
+    )
 
 
     //getTotal
-  const createHumanPlayer = () => {
-    const first = document.getElementById("value_range1").innerText
-    const second = document.getElementById("value_range2").innerText
-    const third = document.getElementById("value_range3").innerText
-    const fourth = document.getElementById("value_range4").innerText
-    const name = document.getElementById("vinputName").value
-    const battleCry = document.getElementById("battleCry").value
-    const randomPower = Math.round(Math.random() * 100)
-    const randomCombat = Math.round(Math.random() * 100)
-    return new HumanPlayer(first, second, third, fourth, randomPower, randomCombat, name, battleCry)
-  }
+  // const createHumanPlayer = () => {
+  //   const first = document.getElementById("value_range1").innerText
+  //   const second = document.getElementById("value_range2").innerText
+  //   const third = document.getElementById("value_range3").innerText
+  //   const fourth = document.getElementById("value_range4").innerText
+  //   const name = document.getElementById("vinputName").value
+  //   const battleCry = document.getElementById("battleCry").value
+  //   const randomPower = Math.round(Math.random() * 100)
+  //   const randomCombat = Math.round(Math.random() * 100)
+  //   return new HumanPlayer(first, second, third, fourth, randomPower, randomCombat, name, battleCry)
+  // }
 
 
-  const getTotal = () => {
-    console.log("coucou je suis dans getTotal")
-      const total = document.getElementById("total")
-      const intelligence = document.getElementById("value_range1").innerText
-      const strength = document.getElementById("value_range2").innerText
-      const speed = document.getElementById("value_range3").innerText
-      const durability = document.getElementById("value_range4").innerText
-      total.innerHTML = "" + (Number(intelligence) + Number(strength) + Number(speed) + Number(durability))
-  }
+  // const getTotal = () => {
+  //   console.log("coucou je suis dans getTotal")
+  //     const total = document.getElementById("total")
+  //     const intelligence = document.getElementById("value_range1").innerText
+  //     const strength = document.getElementById("value_range2").innerText
+  //     const speed = document.getElementById("value_range3").innerText
+  //     const durability = document.getElementById("value_range4").innerText
+  //     total.innerHTML = "" + (Number(intelligence) + Number(strength) + Number(speed) + Number(durability))
+  // }
 
 
   //on récupère la valeur de chaque range-slider
@@ -182,9 +183,9 @@ const controllers = {
           });
 
           range.on('input', function () {
-              console.log(this.value)
+              //console.log(this.value)
               $(this).next(value).html(this.value)
-              getTotal()
+              //getTotal()
             //  userStats = getTotal
               //console.log(playerHuman)
           });
@@ -195,15 +196,11 @@ const controllers = {
     rangeSlider()
 
 
-    const form = document.getElementById("UserForm")
-    validateHumanClickHandler.addEventListener("submit", e => {
+    const form = document.getElementById("userForm")
+    form.addEventListener("submit", e => {
       e.preventDefault()
       const data = serializeForm(form)
-
-
-      //createHumanPlayer()
-      const playerHuman = new HumanPlayer(intelligence, strength, speed, durability, name, battlecry)
-      console.log("carc humaines : ", playerHuman)
+      console.log("notre humain : ", data)
     })
   },
 
