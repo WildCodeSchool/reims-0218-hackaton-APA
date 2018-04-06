@@ -172,7 +172,7 @@ const controllers = {
         </div>
         <div class="form-group row">
             <div class="col-sm-10">
-                <button id="recordStats" class="btn btn-success btn-lg" role="button"record my stats!</a>
+                <button id="recordStats" class="btn btn-success btn-lg" role="button"> Enregistrer mes stats</button>
             </div>
         </div>
     </form>
@@ -251,11 +251,11 @@ const controllers = {
       render(`
       <div id="opponentRow" class="row">
       ${tsTest}
-      
-      </div>`)
+      </div>
+      <button id="fight" class="btn btn-success btn-lg" role="button">Ready to fight!!!</button>`)
 
-    const callMyLink = () => {
-      const url = `https://cdn.rawgit.com/akabab/superhero-api/0.2.0/api/all.json`;
+    //const callMyLink = () => {
+      const url = `https://cdn.rawgit.com/akabab/superhero-api/0.2.0/api/all.json`
 
       fetch(url)
         .then(reponse => {
@@ -304,14 +304,28 @@ const controllers = {
               computer.resetPower()
               console.log(playerHuman1)
             }
-            if (playerHuman1.lifePoints > computer.lifePoints) {
-              alert(`Le vainqueur est ${playerHuman1.name}`)
-            } else {
-              alert(`Le vainqueur est ${computer.name}`)
+            
+          //   const winner =  (obj1, obj2)=> {
+          //     console.log("Prions...")
+          //     if (obj1.lifePoints > obj2.lifePoints) {
+          //       alert(`Le vainqueur est ${obj1.name}`)
+          //     } else {
+          //       alert(`Le vainqueur est ${obj2.name}`)
+          //     }
+          // }
+          const winner2 = () => playerHuman1 > computer ? alert(`Le vainqueur est ${playerHuman1.name}`) : alert(`Le vainqueur est ${computer.name}`)
+            const whoWins = (obj1, obj2) => {
+              return winner(obj1, obj2)
             }
+            //callMyLink();
+           // return [playerHuman1, computer]
+            console.log('why???', playerHuman1)
+            const fightButton = document.getElementById('fight')
+            fightButton.addEventListener('click', winner2)
         })
-    };
-    callMyLink();
+       
+       
+
   },
   '/game' : () =>{
     render('<p>Now playing...wait 2 sec to see result alert</p>')
