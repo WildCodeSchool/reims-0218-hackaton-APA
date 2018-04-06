@@ -314,9 +314,9 @@ const controllers = {
           //     }
           // }
           const winner2 = () => playerHuman1 > computer ? alert(`Le vainqueur est ${playerHuman1.name}`) : alert(`Le vainqueur est ${computer.name}`)
-            const whoWins = (obj1, obj2) => {
-              return winner(obj1, obj2)
-            }
+            // const whoWins = (obj1, obj2) => {
+            //   return winner(obj1, obj2)
+            // }
             //callMyLink();
            // return [playerHuman1, computer]
             console.log('why???', playerHuman1)
