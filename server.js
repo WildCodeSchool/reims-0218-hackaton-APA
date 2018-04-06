@@ -1,7 +1,6 @@
-const express = require('express')
-const app = express()
-app.use(express.static('public'))
-
+const express = require("express");
+const app = express();
+app.use(express.static("public"));
 
 const html = `
 <!doctype html>
@@ -14,14 +13,44 @@ const html = `
     <link rel="stylesheet" href="/style.css">
   </head>
   <body>
+  <div class="container-fluid">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">SuperFighting</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="/">Play</a>
+      <a class="nav-item nav-link" href="#">About us</a>
+   </div>
+  </div>
+</nav>
   <header>
-    <div class="jumbotron jumbotron-fluid">
-      <div class="container">
-        <h1 class="display-4">Superheroes fighters!</h1>
-        <p class="lead">Turn by turn game</p>
-      </div>
+  <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img style="width:550px; height:550px;" class="d-block w-100" src="/img/superhero.jpg" alt="First slide">
     </div>
+    <div class="carousel-item">
+      <img style="width:550px; height:550px;" class="d-block w-100" src="/img/batman.jpg" alt="Second slide">
+    </div>
+    <div class="carousel-item">
+      <img style="width:550px; height:550px;" class="d-block w-100" src="/img/spiderman.jpg" alt="Third slide">
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
   </header>
+  </div>
     <div id="main" class="container">
 
     </div>
@@ -39,12 +68,11 @@ const html = `
         <script src="/app.js"></script>
 
   </body>
-</html>`
+</html>`;
 
+app.get("*", (req, res) => {
+  res.send(html);
+  res.end();
+});
 
-app.get('*', (req, res) => {
-  res.send(html)
-  res.end()
-})
-
-app.listen(8000)
+app.listen(8000);

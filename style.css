@@ -8,6 +8,7 @@
 body {
   font-family: sans-serif;
   padding: 60px 20px;
+  background-color: #d6d6d6c4;
 }
 @media (min-width: 600px) {
   body {
@@ -28,7 +29,7 @@ body {
   /* width: calc(100% - (73px));*/
   height: 10px;
   border-radius: 5px;
-  background: #d7dcdf;
+  background: #4eab00;
   outline: none;
   padding: 0;
   margin: 0;
