@@ -6,7 +6,8 @@ const render = html => {
 
 //fonction makeOpponent qui génère une carte bootrap
 
-
+//objet pour l'humain. Déclaré ici, modifié dans les fonctions du form(route /),
+//et réutilisé dans (/opponent) pour choisir les 3 potentiels adversaires
 
 const controllers = {
   '/': () => {
@@ -68,8 +69,16 @@ const controllers = {
     <p id="total"></p>`)
 
 
+    const createHumanPlayer = () => {
+      const first = document.getElementById("value_range1").innerText
+      const second = document.getElementById("value_range2").innerText
+      const third = document.getElementById("value_range3").innerText
+      const fourth = document.getElementById("value_range4").innerText
+      return new Player(first, second, third, fourth, 33, 54, "Thomas", "Console.log!!!!!!!!!!")
+    }
 
-    getTotal = () => {
+
+    const getTotal = () => {
       console.log("coucou je suis dans getTotal")
         const total = document.getElementById("total")
         const intelligence = document.getElementById("value_range1").innerText
@@ -77,15 +86,16 @@ const controllers = {
         const speed = document.getElementById("value_range3").innerText
         const durability = document.getElementById("value_range4").innerText
         total.innerHTML = "" + (Number(intelligence) + Number(strength) + Number(speed) + Number(durability))
-        return [intelligence, strength, speed, durability]
     }
+
+
     //on récupère la valeur de chaque range-slider
     const rangeSlider = function () {
         let slider = $('.range-slider'),
             range = $('.range-slider__range'),
             value = $('.range-slider__value');
 
-        let userStats = []
+        
 
         slider.each(function () {
             value.each(function () {
