@@ -112,36 +112,36 @@ const controllers = {
     render(`
       <h2>Choose your characteristics:</h2>
       <form id="userForm">
-        <div class="form-group row">
-            <label for="inputIntelligence" class="col-sm-2 col-form-label">Intelligence:</label>
-            <div class="col-sm-10">
+        <div class="form-group row justify-content-center">
+            <label for="inputIntelligence" class="col-sm-2 col-form-label align-self-center">Intelligence:</label>
+            <div class="col-sm-10 align-self-center">
                 <div class="range-slider">
                     <input class="myForm range-slider__range" name="intelligence" type="range" value="50" min="0" max="100">
                     <span id="inputIntelligence" class="range-slider__value">0</span>
                 </div>
             </div>
         </div>
-        <div class="form-group row">
-            <label for="inputStrength" class="col-sm-2 col-form-label">Strength:</label>
-            <div class="col-sm-10">
+        <div class="form-group row justify-content-center">
+            <label for="inputStrength" class="col-sm-2 col-form-label align-self-center">Strength:</label>
+            <div class="col-sm-10 align-self-center">
                 <div class="range-slider">
                     <input class="myForm range-slider__range" name="strength" type="range" value="50" min="0" max="100">
                     <span id="InputStrength" class="range-slider__value">0</span>
                 </div>
             </div>
         </div>
-        <div class="form-group row">
-            <label for="inputSpeed" class="col-sm-2 col-form-label">Speed:</label>
-            <div class="col-sm-10">
+        <div class="form-group row justify-content-center">
+            <label for="inputSpeed" class="col-sm-2 col-form-label align-self-center">Speed:</label>
+            <div class="col-sm-10 col align-self-center">
                 <div class="range-slider">
                     <input class="myForm range-slider__range" name="speed" type="range" value="50" min="0" max="100">
                     <span id="inputSpeed" class="range-slider__value">0</span>
                 </div>
             </div>
         </div>
-        <div class="form-group row">
-            <label for="inputDurability" class="col-sm-2 col-form-label">Durability:</label>
-            <div class="col-sm-10">
+        <div class="form-group row justify-content-center">
+            <label for="inputDurability" class="col-sm-2 col-form-label align-self-center">Durability:</label>
+            <div class="col-sm-10 col align-self-center">
                 <div class="range-slider">
                     <input class="myForm range-slider__range" name="durability" type="range" value="50" min="0" max="100">
                     <span id="inputDurability"  class="range-slider__value">0</span>
@@ -156,14 +156,14 @@ const controllers = {
           <label for="inputBattleCry">Battle cry:</label>
           <input type="text" class="myForm col-sm-10 form-control" id="battleCry" name="battleCry" placeholder="Votre cri de guerre !">
         </div>
-        <div class="form-group row">
+        <div class="form-group row justify-content-center">
             <div class="col-sm-10">
                 <button id="recordStats" class="btn btn-success btn-lg" role="button"> Enregistrer mes stats</button>
             </div>
         </div>
     </form>
     <p id="total"></p>
-    <a id="finishCreation" class="btn btn-success btn-lg" href="/opponent" role="button">See opponent »</a>`
+    <a id="finishCreation" class="btn btn-danger btn-lg" href="/opponent" role="button">Choisir mon adversaire</a>`
     )
 
   //on récupère la valeur de chaque range-slider
