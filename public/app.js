@@ -148,13 +148,13 @@ const controllers = {
                 </div>
             </div>
         </div>
-        <div class="form-group row">
+        <div class="form-group">
           <label for="inputName">Name:</label>
-          <input type="text" class="myForm col-sm-10 form-control" id="inputName" name="name" placeholder="Your name">
+          <input type="text" class="myForm col-sm-10 form-control" id="inputName" name="name" placeholder="Votre nom de superhéros">
         </div>
         <div class="form-group">
           <label for="inputBattleCry">Battle cry:</label>
-          <input type="text" class="myForm col-sm-10 form-control" id="battleCry" name="battleCry" placeholder="Your battle cry!">
+          <input type="text" class="myForm col-sm-10 form-control" id="battleCry" name="battleCry" placeholder="Votre cri de guerre !">
         </div>
         <div class="form-group row">
             <div class="col-sm-10">
@@ -163,7 +163,7 @@ const controllers = {
         </div>
     </form>
     <p id="total"></p>
-      <a id="finishCreation" class="btn btn-success btn-lg" href="/opponent" role="button">See opponent »</a>`
+    <a id="finishCreation" class="btn btn-success btn-lg" href="/opponent" role="button">See opponent »</a>`
     )
 
   //on récupère la valeur de chaque range-slider
