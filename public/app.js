@@ -5,7 +5,6 @@ const render = html => {
 }
 
 const makeOpponentCard = (item, fun) => {
-  console.log('item is : ', item)
   const list = fun(item)
   const innerText =`
   <div class="col-md-4">
@@ -20,13 +19,9 @@ const makeOpponentCard = (item, fun) => {
   return innerText}
 
 const displayComputer = (obj) => {
-  console.log('notre display qui bugg: ', obj)
   let list = '';
-  console.log('onva display:', obj.name)
   list += `<li>name: ${obj.name}</li>`
-  console.log('ça marche?', obj.powerstats)
   const keys = Object.keys(obj.powerstats)
-  console.log('nos clés: ', keys)
   for (let key of keys) {
     list += '<li>' +key + ':' + obj.powerstats[key] + '</li>'
   }
@@ -34,12 +29,9 @@ const displayComputer = (obj) => {
 }
 
 const displayPlayer = (obj) => {
-  console.log('notre display qui bugg: ', obj)
   let list = '';
-  console.log('onva display:', obj.name)
   list += `<li>name: ${obj.name}</li>`
   const keys = Object.keys(obj.stats)
-  //console.log('nos clés: ', keys)
   for (let key of keys) {
    list += `<li>${key} : ${obj.stats[key]}</li>`
   }
@@ -62,8 +54,6 @@ class Player {
     this.lifePoints -= blow;
   }
   addChance(ability) {
-    console.log('original: ', this.stats.power);
-    console.log('ability?', ability, this.stats[ability]);
     this.stats.power += Math.round(Math.random() * this.stats[ability]);
   }
   resetPower() {
@@ -115,12 +105,6 @@ const serializeForm = form => {
   }
   return data
 }
-
-
-//fonction makeOpponent qui génère une carte bootrap
-
-//objet pour l'humain. Déclaré ici, modifié dans les fonctions du form(route /),
-//et réutilisé dans (/opponent) pour choisir les 3 potentiels adversaires
 
 const controllers = {
   '/': () => {
@@ -182,39 +166,11 @@ const controllers = {
       <a id="finishCreation" class="btn btn-success btn-lg" href="/opponent" role="button">See opponent »</a>`
     )
 
-
-    //getTotal
-  // const createHumanPlayer = () => {
-  //   const first = document.getElementById('value_range1').innerText
-  //   const second = document.getElementById('value_range2').innerText
-  //   const third = document.getElementById('value_range3').innerText
-  //   const fourth = document.getElementById('value_range4').innerText
-  //   const name = document.getElementById('vinputName').value
-  //   const battleCry = document.getElementById('battleCry').value
-  //   const randomPower = Math.round(Math.random() * 100)
-  //   const randomCombat = Math.round(Math.random() * 100)
-  //   return new HumanPlayer(first, second, third, fourth, randomPower, randomCombat, name, battleCry)
-  // }
-
-
-  // const getTotal = () => {
-  //   console.log('coucou je suis dans getTotal')
-  //     const total = document.getElementById('total')
-  //     const intelligence = document.getElementById('value_range1').innerText
-  //     const strength = document.getElementById('value_range2').innerText
-  //     const speed = document.getElementById('value_range3').innerText
-  //     const durability = document.getElementById('value_range4').innerText
-  //     total.innerHTML = '' + (Number(intelligence) + Number(strength) + Number(speed) + Number(durability))
-  // }
-
-
   //on récupère la valeur de chaque range-slider
   const rangeSlider = function () {
       let slider = $('.range-slider'),
           range = $('.range-slider__range'),
           value = $('.range-slider__value');
-
-
 
       slider.each(function () {
           value.each(function () {
@@ -223,11 +179,7 @@ const controllers = {
           });
 
           range.on('input', function () {
-              //console.log(this.value)
               $(this).next(value).html(this.value)
-              //getTotal()
-            //  userStats = getTotal
-              //console.log(playerHuman1)
           });
       });
       //return userStats
@@ -235,12 +187,10 @@ const controllers = {
 
     rangeSlider()
 
-
     const form = document.getElementById('userForm')
     form.addEventListener('submit', e => {
       e.preventDefault()
       const data = serializeForm(form)
-      console.log('notre humain : ', data)
       sessionStorage.setItem('user', JSON.stringify(data))
     })
   },
@@ -256,7 +206,6 @@ const controllers = {
       </div>
       <button id="fight" class="btn btn-success btn-lg" role="button">Ready to fight!!!</button>`)
 
-    //const callMyLink = () => {
       const url = `https://cdn.rawgit.com/akabab/superhero-api/0.2.0/api/all.json`
 
       fetch(url)
@@ -265,30 +214,21 @@ const controllers = {
         })
         .then(result => {
           const playerHuman1 = new HumanPlayer(50, 70, 20, 67, 70, 60, 'Thomas', 'Fdsdf')
-          console.log('je suis lhumain ', playerHuman1)
           const selectedHeroes = result.filter(hero => {
-            //console.log('hero api', hero)
             const totalHero = hero.powerstats.intelligence + hero.powerstats.strength + hero.powerstats.speed + hero.powerstats.durability
-            //console.log('comparaison: ', totalHero, playerHuman1.total)
-            //console.log('notre total hero: ', totalHero)
             return totalHero < playerHuman1.total + 10 && totalHero > playerHuman1.total - 10
           })
           //Générer 3 computerPlayers aléatoires
-
-          console.log('Résultat du filtre: ', selectedHeroes.length)
           const first = Math.floor(Math.random() * selectedHeroes.length) + 1
           const second = Math.floor(Math.random() * selectedHeroes.length) + 1
           const third = Math.floor(Math.random() * selectedHeroes.length) + 1
 
           let heroesArr = [selectedHeroes[first], selectedHeroes[second], selectedHeroes[third]]
-          console.log('Je suis le tableau de 3 ', heroesArr)
-          //console.log(heroesArr[0].powerstats)
           const heroesObjects = heroesArr.map(obj => new ComputerPlayer(obj.powerstats.intelligence, obj.powerstats.strength, obj.powerstats.speed, obj.powerstats.durability, obj.powerstats.power, obj.powerstats.combat, obj.name, obj.images.sm))
           const allOpponents = heroesArr. reduce((carry, opponent) => carry + makeOpponentCard(opponent, displayComputer), '')
           const displayCards = document.getElementById('opponentRow')
           displayCards.innerHTML = allOpponents
         
-
           const displayHuman = document.getElementById('display');
           displayPlayer(playerHuman1, displayHuman)
            
@@ -300,24 +240,18 @@ const controllers = {
               playerHuman1.addChance('strength')
               computer.updateLifePoint(playerHuman1.stats.power)
               playerHuman1.resetPower()
-              console.log(computer)
               computer.addChance('speed')
               playerHuman1.updateLifePoint(computer.stats.power)
               computer.resetPower()
-              console.log(playerHuman1)
             }
             
             //fonction à déclencher sur le click
           const winner2 = () => playerHuman1 > computer ? alert(`Le vainqueur est ${playerHuman1.name}`) : alert(`Le vainqueur est ${computer.name}`)
             
-            console.log('why???', playerHuman1)
-            const fightButton = document.getElementById('fight')
-            fightButton.addEventListener('click', winner2)
+          const fightButton = document.getElementById('fight')
+          fightButton.addEventListener('click', winner2)
         })
-       
-       
-
-  },
+      },
   '/game' : () =>{
     render('<p>Now playing...wait 2 sec to see result alert</p>')
     setTimeout(() => alert('YOU WIN!!!'), 2000);
