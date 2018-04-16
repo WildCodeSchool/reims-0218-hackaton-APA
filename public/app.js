@@ -5,11 +5,12 @@ const render = html => {
 }
 
 const makeOpponentCard = (item, fun) => {
+  console.log('item is : ', item)
   const list = fun(item)
   const innerText =`
   <div class="col-md-4">
     <div class="card mb-4 box-shadow">
-      <img class="card-img-top" src=".." alt="Thumbnail [100%x225]" />
+      <img class="card-img-top" src="${item.images.sm}" alt="Thumbnail [100%x225]" />
       <div class="card-body">
         <p class="card-text" style="height: 80px">${item.name}</p>
         <ul>${list}<ul>
@@ -97,10 +98,11 @@ class ComputerPlayer extends Player {
     power,
     combat,
     name,
-    battleCry
+    url
   ) {
     super(intelligence, strength, speed, durability, power, combat);
     this.name = name;
+    this.url = url
   }
 
 }
@@ -281,7 +283,7 @@ const controllers = {
           let heroesArr = [selectedHeroes[first], selectedHeroes[second], selectedHeroes[third]]
           console.log('Je suis le tableau de 3 ', heroesArr)
           //console.log(heroesArr[0].powerstats)
-          const heroesObjects = heroesArr.map(obj => new ComputerPlayer(obj.powerstats.intelligence, obj.powerstats.strength, obj.powerstats.speed, obj.powerstats.durability, obj.powerstats.power, obj.powerstats.combat, obj.name))
+          const heroesObjects = heroesArr.map(obj => new ComputerPlayer(obj.powerstats.intelligence, obj.powerstats.strength, obj.powerstats.speed, obj.powerstats.durability, obj.powerstats.power, obj.powerstats.combat, obj.name, obj.images.sm))
           const allOpponents = heroesArr. reduce((carry, opponent) => carry + makeOpponentCard(opponent, displayComputer), '')
           const displayCards = document.getElementById('opponentRow')
           displayCards.innerHTML = allOpponents
